@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "nodemon server.js"
+=======
+   "start": "node server.js"
+>>>>>>> 5d55ea48b683e9dcd0d8de042f74499bfc63d5f1
   },
   "engines": {
   "node": "20.x"
