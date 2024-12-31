@@ -17,6 +17,8 @@ function Home() {
   const [showLikes, setShowLikes] = useState(null);
   const [searchTerm, setSearchTerm] = useState(''); // État pour le mot recherché
   const [highlightedPostIndex, setHighlightedPostIndex] = useState(null); // Index du post correspondant
+  const [refresh, setRefresh] = useState(false);
+
 
   const alertRef = useRef();
   const navigate = useNavigate();
@@ -59,7 +61,7 @@ function Home() {
     };
 
     fetchPostsWithUserData();
-  }, [myPosts, userData, fetchUserData, navigate]);
+  }, [myPosts, userData, fetchUserData, navigate,refresh]);
 
   const handlePost = async () => {
     try {
@@ -86,6 +88,7 @@ function Home() {
       setMessage('');
       setImage(null);
       setEditingPost(null);
+      setRefresh(!refresh);
     } catch (error) {
       alertRef.current.showAlert(
         'Erreur lors de partage du post. \n Verifiez bien si vous remplissez les champs Titre et Message'
@@ -119,6 +122,7 @@ function Home() {
         post._id === postId ? { ...post, likes: response.data.likes } : post
       );
       setPosts(updatedPosts);
+      setRefresh(!refresh);
     } catch (error) {
       console.error('Erreur lors du like du post', error);
     }
